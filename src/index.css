@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Laranja Erga — #FE5800 é a cor de marca (acentos e textos grandes).
+     erga-600 é o tom usado atrás de texto branco, para manter contraste AA. */
+  --color-erga-50: #fff4ed;
+  --color-erga-100: #ffe6d5;
+  --color-erga-200: #ffc9ac;
+  --color-erga-300: #ffa574;
+  --color-erga-400: #ff7c3c;
+  --color-erga-500: #fe5800;
+  --color-erga-600: #cf4500;
+  --color-erga-700: #a83800;
+  --color-erga-800: #7a2900;
+  --color-erga-900: #4f1b00;
+  --color-erga-ink: #8a3000;
+
+  /* Azul Google */
+  --color-gblue-50: #f1f5fc;
+  --color-gblue-100: #e1e9f8;
+  --color-gblue-200: #c3d2ef;
+  --color-gblue-300: #9ab2e1;
+  --color-gblue-400: #6c8cd0;
+  --color-gblue-500: #3c60ac;
+  --color-gblue-600: #2e4a87;
+  --color-gblue-700: #243a6b;
+  --color-gblue-800: #1a2a4d;
+
+  --color-ink-900: #0e1218;
+  --color-ink-800: #1b212b;
+  --color-ink-700: #2a313b;
+  --color-ink-600: #454e5c;
+  --color-ink-500: #5a6472;
+  --color-ink-400: #7c8695;
+  --color-ink-300: #a8b0bb;
+
+  --color-surface: #f7f8fa;
+  --color-surface-2: #fbfbfc;
+  --color-line: #e6e8ec;
+  --color-line-soft: #f0f1f4;
+
+  --shadow-soft: 0 1px 2px rgb(14 18 24 / 0.04), 0 4px 16px -4px rgb(14 18 24 / 0.06);
+  --shadow-card: 0 2px 4px rgb(14 18 24 / 0.03), 0 12px 32px -12px rgb(14 18 24 / 0.12);
+  --shadow-lift: 0 8px 20px -6px rgb(14 18 24 / 0.12), 0 28px 60px -24px rgb(14 18 24 / 0.22);
+  --shadow-glow: 0 12px 40px -12px rgb(254 88 0 / 0.42);
+
+  --radius-card: 1rem;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-ink-700);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink-900);
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-erga-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: var(--color-erga-500);
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    background-color: #ffffff;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-500);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      transform 0.2s var(--ease-out-soft),
+      box-shadow 0.2s var(--ease-out-soft),
+      background-color 0.2s var(--ease-out-soft),
+      color 0.2s var(--ease-out-soft),
+      border-color 0.2s var(--ease-out-soft);
+  }
+
+  /* Texto branco sobre o laranja de marca (#FE5800) atinge 3,18:1 — dentro do
+     exigido para texto grande (3:1). O rótulo de 19px/700 classifica-se como
+     texto grande na WCAG, então o CTA de marca continua no laranja exato. */
+  .btn-lg {
+    min-height: 3.25rem;
+    padding: 0.875rem 1.75rem;
+    font-size: 1.1875rem;
+    font-weight: 700;
+  }
+
+  .btn-primary {
+    background-color: var(--color-erga-500);
+    color: #ffffff;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-erga-600);
+  }
+
+  .btn-secondary {
+    background-color: #ffffff;
+    color: var(--color-ink-900);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-erga-200);
+    color: var(--color-erga-700);
+  }
+
+  .btn-ghost-light {
+    background-color: #ffffff;
+    color: var(--color-ink-900);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .btn-ghost-light:hover {
+    background-color: var(--color-erga-50);
+  }
+
+  .card {
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-line);
+    background-color: #ffffff;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .grid-soft {
+    background-image:
+      linear-gradient(to right, rgb(14 18 24 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(14 18 24 / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
